@@ -250,7 +250,11 @@ def main():
 
     # Generate timestamp for filename
     timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
-    filename = f"grype_{timestamp}.html"
+
+    if '-o' in sys.argv:
+        filename = sys.argv[sys.argv.index('-o') + 1]
+    else:
+        filename = f"grype_{timestamp}.html"
 
     # Create the HTML report
     report = HTML_TEMPLATE.format(
