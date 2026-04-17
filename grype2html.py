@@ -252,7 +252,12 @@ def main():
     timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
 
     if '-o' in sys.argv:
-        filename = sys.argv[sys.argv.index('-o') + 1]
+        idx = sys.argv.index('-o')
+        if idx + 1 >= len(sys.argv):
+            print("Error: -o flag requires a filename argument", file=sys.stderr)
+            print("Usage: grype [options] | python3 grype2html.py [-o output.html]", file=sys.stderr)
+            sys.exit(1)
+        filename = sys.argv[idx + 1]
     else:
         filename = f"grype_{timestamp}.html"
 
